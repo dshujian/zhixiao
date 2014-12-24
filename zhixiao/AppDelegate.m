@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "WeiboSDK.h"
+#import "CONSTS.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //首次集成微博SDK,建议打开调试选项以便输出调试信息
+    [WeiboSDK enableDebugMode:NO];
+    //注册 appkey(clientid)
+    [WeiboSDK registerApp:kAppKey];
+    
+     _rootView = [[LoginViewCotroller alloc] init];
+    self.window.rootViewController = _rootView;
     return YES;
 }
 
@@ -122,6 +131,17 @@
             abort();
         }
     }
+}
+
+#pragma mark - Weibodelegate
+
+//重写 AppDelegate 的 handleOpenURL 和 openURL 方法
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [WeiboSDK handleOpenURL:url delegate:_rootView];
+}
+
+-(BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return  [WeiboSDK handleOpenURL:url delegate:_rootView];
 }
 
 @end

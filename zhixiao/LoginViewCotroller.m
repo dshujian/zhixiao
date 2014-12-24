@@ -12,6 +12,7 @@
 
 @implementation LoginViewCotroller
 @synthesize wbtoken;
+@synthesize userID;
 
 - (void) viewDidLoad {
     
@@ -93,9 +94,15 @@
                 title = @"登录成功";
                 //获取accessToken
                 [self setWbtoken:[(WBAuthorizeResponse *)response accessToken]];
+                //获取userID
+                [self setUserID:[(WBAuthorizeResponse *)response userID]];
                 //保存 accessToken 到本地
                 [[NSUserDefaults standardUserDefaults] setObject:wbtoken forKey:kWbtoken];
+                //保存userID 到本地
+                [[NSUserDefaults standardUserDefaults] setObject:userID forKey:kUserID];
                 //同步 accessToken
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                //同步 Userid
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 //加载数据
 //                [_homeVC loadWeiboData];

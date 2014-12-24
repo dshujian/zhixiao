@@ -11,5 +11,6 @@
 @interface LoginViewCotroller : ViewController
 
 @property(nonatomic) NSString *wbtoken;
+@property(nonatomic) NSString *userID;
 
 @end

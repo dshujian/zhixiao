@@ -12,6 +12,7 @@
 //weibo appKey
 #define kAppKey         @"3275163745"
 #define kWbtoken @"kWbtoken"              //微博token
+#define kUserID @"kUserID"                  //微博Userid
 
 //微博
 #define kRedirectURI @"https://api.zhixiaoapp.com/v1/auth/weibo"
